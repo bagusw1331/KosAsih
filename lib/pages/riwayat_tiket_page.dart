@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/kosasih_bottom_nav.dart';
+
 /// Riwayat dan progres tiket aduan penghuni.
 class RiwayatTiketPage extends StatelessWidget {
   const RiwayatTiketPage({super.key});
@@ -71,39 +73,9 @@ class RiwayatTiketPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: const PenghuniBottomNav(
         currentIndex: 2,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF1D4ED8),
-        unselectedItemColor: const Color(0xFF64748B),
-        onTap: (index) {
-          if (index == 0) {
-            Navigator.of(context).pushReplacementNamed('/beranda-penghuni');
-          }
-          if (index == 1) {
-            Navigator.of(context).pushReplacementNamed('/rincian-tagihan');
-          }
-          if (index == 3) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Panduan belum tersedia.')),
-            );
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Beranda',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.receipt_outlined),
-            label: 'Tagihan',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.build), label: 'Aduan'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_outlined),
-            label: 'Panduan',
-          ),
-        ],
+        allowReselectCurrent: true,
       ),
     );
   }

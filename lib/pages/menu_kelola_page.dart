@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/kosasih_bottom_nav.dart';
 import 'aturan_denda_page.dart';
-import 'dashboard_pemilik_page.dart';
 import 'data_penghuni_page.dart';
 import 'kelola_kamar_page.dart';
-import 'komplain_fasilitas_page.dart';
 import 'login_page.dart';
-import 'papan_pengumuman_page.dart';
-import 'verifikasi_pembayaran_page.dart';
 
 void main() => runApp(
   const MaterialApp(debugShowCheckedModeBanner: false, home: MenuKelolaPage()),
@@ -533,53 +530,8 @@ class MenuKelolaPage extends StatelessWidget {
           ),
         ),
       ),
-      // Bottom Navigation Bar Kustom Pemilik Kos
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          border: Border(top: BorderSide(color: Color(0xFFF3F4F6))),
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildNavItem(
-              Icons.home_outlined,
-              'Beranda',
-              false,
-              onTap: () =>
-                  Navigator.of(context)
-                      .pushReplacementNamed(DashboardPemilikPage.routeName),
-            ),
-            _buildNavItem(
-              Icons.verified_user_outlined,
-              'Verifikasi',
-              false,
-              badge: '2',
-              onTap: () => Navigator.of(context)
-                  .pushReplacementNamed(VerifikasiPembayaranPage.routeName),
-            ),
-            _buildNavItem(
-              Icons.warning_amber,
-              'Komplain',
-              false,
-              badge: '1',
-              onTap: () =>
-                  Navigator.of(context)
-                      .pushReplacementNamed(KomplainFasilitasPage.routeName),
-            ),
-            _buildNavItem(
-              Icons.campaign_outlined,
-              'Pengumuman',
-              false,
-              onTap: () =>
-                  Navigator.of(context)
-                      .pushReplacementNamed(PapanPengumumanPage.routeName),
-            ),
-            _buildNavItem(Icons.grid_view, 'Kelola', true),
-          ],
-        ),
-      ),
+      // Bottom Navigation Bar Mode Pemilik
+      bottomNavigationBar: const PemilikBottomNav(currentIndex: 4),
     );
   }
 
@@ -738,66 +690,6 @@ class MenuKelolaPage extends StatelessWidget {
           const SizedBox(width: 8),
           const Icon(Icons.chevron_right, size: 20, color: Color(0xFF9CA3AF)),
         ],
-      ),
-    );
-  }
-
-  // Helper Widget: Navigasi Bawah (Bottom Nav Item)
-  Widget _buildNavItem(
-    IconData icon,
-    String label,
-    bool isActive, {
-    String? badge,
-    VoidCallback? onTap,
-  }) {
-    final Color color = isActive
-        ? const Color(0xFF1545C7)
-        : const Color(0xFF6B7280);
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(10),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Icon(icon, size: 22, color: color),
-                if (badge != null)
-                  Positioned(
-                    right: -6,
-                    top: -4,
-                    child: Container(
-                      padding: const EdgeInsets.all(3),
-                      decoration: const BoxDecoration(
-                        color: Color(0xFFDC2626),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Text(
-                        badge,
-                        style: const TextStyle(
-                          fontSize: 9,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-            const SizedBox(height: 2),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-                color: color,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

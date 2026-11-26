@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'dashboard_pemilik_page.dart';
-import 'komplain_fasilitas_page.dart';
-import 'menu_kelola_page.dart';
-import 'papan_pengumuman_page.dart';
+import '../widgets/kosasih_bottom_nav.dart';
 
 /// Halaman Verifikasi Bukti Pembayaran (mode Pemilik).
 class VerifikasiPembayaranPage extends StatefulWidget {
@@ -120,23 +117,6 @@ class _VerifikasiPembayaranPageState extends State<VerifikasiPembayaranPage> {
     ),
   ];
 
-  void _onNavTap(BuildContext context, int index) {
-    if (index == 1) return;
-    switch (index) {
-      case 0:
-        Navigator.of(context)
-            .pushReplacementNamed(DashboardPemilikPage.routeName);
-      case 2:
-        Navigator.of(context)
-            .pushReplacementNamed(KomplainFasilitasPage.routeName);
-      case 3:
-        Navigator.of(context)
-            .pushReplacementNamed(PapanPengumumanPage.routeName);
-      case 4:
-        Navigator.of(context).pushReplacementNamed(MenuKelolaPage.routeName);
-    }
-  }
-
   int get _jumlahMenunggu => _daftarBukti
       .where((e) => e.status == _StatusVerifikasi.menunggu)
       .length;
@@ -244,7 +224,6 @@ class _VerifikasiPembayaranPageState extends State<VerifikasiPembayaranPage> {
   @override
   Widget build(BuildContext context) {
     final items = _filteredItems;
-    final badgeMenunggu = _jumlahMenunggu.toString();
 
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FB),
@@ -686,43 +665,9 @@ class _VerifikasiPembayaranPageState extends State<VerifikasiPembayaranPage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: PemilikBottomNav(
         currentIndex: 1,
-        onTap: (index) => _onNavTap(context, index),
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF1545C7),
-        unselectedItemColor: const Color(0xFF64748B),
-        selectedFontSize: 11,
-        unselectedFontSize: 11,
-        items: [
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Beranda',
-          ),
-          BottomNavigationBarItem(
-            icon: Badge(
-              isLabelVisible: _jumlahMenunggu > 0,
-              label: Text(badgeMenunggu),
-              child: const Icon(Icons.verified_user),
-            ),
-            label: 'Verifikasi',
-          ),
-          const BottomNavigationBarItem(
-            icon: Badge(
-              label: Text('1'),
-              child: Icon(Icons.build_circle_outlined),
-            ),
-            label: 'Komplain',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.campaign_outlined),
-            label: 'Pengumuman',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view_outlined),
-            label: 'Kelola',
-          ),
-        ],
+        verifikasiBadge: _jumlahMenunggu,
       ),
     );
   }

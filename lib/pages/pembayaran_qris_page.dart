@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/kosasih_bottom_nav.dart';
+
 /// Halaman pembayaran QRIS.
 class PembayaranQrisPage extends StatelessWidget {
   const PembayaranQrisPage({super.key});
@@ -402,6 +404,10 @@ class PembayaranQrisPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: const PenghuniBottomNav(
+        currentIndex: 1,
+        allowReselectCurrent: true,
       ),
     );
   }

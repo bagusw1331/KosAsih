@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'dashboard_pemilik_page.dart';
-import 'komplain_fasilitas_page.dart';
-import 'menu_kelola_page.dart';
-import 'verifikasi_pembayaran_page.dart';
+import '../widgets/kosasih_bottom_nav.dart';
 
 void main() => runApp(
   const MaterialApp(
@@ -17,23 +14,6 @@ class PapanPengumumanPage extends StatelessWidget {
 
   /// Nama route, dipakai oleh `main.dart`.
   static const String routeName = '/papan-pengumuman';
-
-  void _onNavTap(BuildContext context, int index) {
-    if (index == 3) return;
-    switch (index) {
-      case 0:
-        Navigator.of(context)
-            .pushReplacementNamed(DashboardPemilikPage.routeName);
-      case 1:
-        Navigator.of(context)
-            .pushReplacementNamed(VerifikasiPembayaranPage.routeName);
-      case 2:
-        Navigator.of(context)
-            .pushReplacementNamed(KomplainFasilitasPage.routeName);
-      case 4:
-        Navigator.of(context).pushReplacementNamed(MenuKelolaPage.routeName);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -738,43 +718,7 @@ class PapanPengumumanPage extends StatelessWidget {
       ),
 
       // Bottom Navigation Bar
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 3, // Selected Pengumuman
-        onTap: (index) => _onNavTap(context, index),
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF1D4ED8),
-        unselectedItemColor: const Color(0xFF64748B),
-        selectedFontSize: 11,
-        unselectedFontSize: 11,
-        items: [
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Beranda',
-          ),
-          const BottomNavigationBarItem(
-            icon: Badge(
-              label: Text('2'),
-              child: Icon(Icons.assignment_outlined),
-            ),
-            label: 'Verifikasi',
-          ),
-          const BottomNavigationBarItem(
-            icon: Badge(
-              label: Text('1'),
-              child: Icon(Icons.build_circle_outlined),
-            ),
-            label: 'Komplain',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.campaign),
-            label: 'Pengumuman',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view_outlined),
-            label: 'Kelola',
-          ),
-        ],
-      ),
+      bottomNavigationBar: const PemilikBottomNav(currentIndex: 3),
     );
   }
 

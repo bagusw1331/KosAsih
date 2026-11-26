@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../widgets/kosasih_bottom_nav.dart';
+
 /// Halaman pembayaran via transfer bank (BCA).
 class PembayaranTransferPage extends StatelessWidget {
   const PembayaranTransferPage({super.key});
@@ -393,6 +395,10 @@ class PembayaranTransferPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: const PenghuniBottomNav(
+        currentIndex: 1,
+        allowReselectCurrent: true,
       ),
     );
   }

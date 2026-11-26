@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/kosasih_bottom_nav.dart';
 import 'riwayat_tiket_page.dart';
 
 void main() => runApp(
@@ -577,29 +578,7 @@ class LaporanAduanPage extends StatelessWidget {
       ),
 
       // Bottom Navigation Bar Mode Penghuni (4 Tab - Selected Aduan)
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 2, // Selected Aduan
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF1D4ED8),
-        unselectedItemColor: const Color(0xFF64748B),
-        selectedFontSize: 11,
-        unselectedFontSize: 11,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Beranda',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.receipt_outlined),
-            label: 'Tagihan',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.build), label: 'Aduan'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_outlined),
-            label: 'Panduan',
-          ),
-        ],
-      ),
+      bottomNavigationBar: const PenghuniBottomNav(currentIndex: 2),
     );
   }
 
