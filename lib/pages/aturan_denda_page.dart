@@ -27,7 +27,7 @@ class AturanDendaPage extends StatelessWidget {
                     width: 40,
                     height: 40,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => Navigator.of(context).maybePop(),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         foregroundColor: const Color(0xFF111827),

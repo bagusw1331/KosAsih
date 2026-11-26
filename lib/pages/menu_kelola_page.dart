@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'aturan_denda_page.dart';
 import 'dashboard_pemilik_page.dart';
+import 'data_penghuni_page.dart';
+import 'kelola_kamar_page.dart';
 import 'komplain_fasilitas_page.dart';
+import 'login_page.dart';
 import 'papan_pengumuman_page.dart';
+import 'verifikasi_pembayaran_page.dart';
 
 void main() => runApp(
   const MaterialApp(debugShowCheckedModeBanner: false, home: MenuKelolaPage()),
@@ -372,6 +377,8 @@ class MenuKelolaPage extends StatelessWidget {
                 badgeColor: const Color(0xFFEFF6FF),
                 badgeTextColor: const Color(0xFF1545C7),
                 borderColor: const Color(0xFFC7D7F8),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(KelolaKamarPage.routeName),
               ),
               const SizedBox(height: 10),
 
@@ -386,6 +393,8 @@ class MenuKelolaPage extends StatelessWidget {
                 badgeColor: const Color(0xFFEFF6FF),
                 badgeTextColor: const Color(0xFF1545C7),
                 borderColor: const Color(0xFFC7D7F8),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(DataPenghuniPage.routeName),
               ),
               const SizedBox(height: 10),
 
@@ -400,6 +409,8 @@ class MenuKelolaPage extends StatelessWidget {
                 badgeColor: const Color(0xFFDCFCE7),
                 badgeTextColor: const Color(0xFF15803D),
                 borderColor: const Color(0xFFFED7AA),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(AturanDendaPage.routeName),
               ),
               const SizedBox(height: 20),
 
@@ -460,7 +471,11 @@ class MenuKelolaPage extends StatelessWidget {
                 width: double.infinity,
                 height: 48,
                 child: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => Navigator.of(context)
+                      .pushNamedAndRemoveUntil(
+                        LoginKosAsihPage.routeName,
+                        (_) => false,
+                      ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFEE2E2),
                     foregroundColor: const Color(0xFFB91C1C),
@@ -541,11 +556,8 @@ class MenuKelolaPage extends StatelessWidget {
               'Verifikasi',
               false,
               badge: '2',
-              onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Halaman Verifikasi belum tersedia.'),
-                ),
-              ),
+              onTap: () => Navigator.of(context)
+                  .pushReplacementNamed(VerifikasiPembayaranPage.routeName),
             ),
             _buildNavItem(
               Icons.warning_amber,
@@ -582,21 +594,27 @@ class MenuKelolaPage extends StatelessWidget {
     required Color badgeColor,
     required Color badgeTextColor,
     required Color borderColor,
+    VoidCallback? onTap,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
+    return Material(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(16),
+      child: InkWell(
+        onTap: onTap,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFF3F4F6)),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0F000000),
-            blurRadius: 12,
-            offset: Offset(0, 4),
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: const Color(0xFFF3F4F6)),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x0F000000),
+                blurRadius: 12,
+                offset: Offset(0, 4),
+              ),
+            ],
           ),
-        ],
-      ),
       child: Row(
         children: [
           Container(
@@ -652,6 +670,8 @@ class MenuKelolaPage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+        ),
       ),
     );
   }

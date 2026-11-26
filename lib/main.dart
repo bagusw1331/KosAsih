@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'pages/aturan_denda_page.dart';
 import 'pages/beranda_penghuni_page.dart';
+import 'pages/kelola_kamar_page.dart';
 import 'pages/komplain_fasilitas_page.dart';
 import 'pages/menu_kelola_page.dart';
 import 'pages/papan_pengumuman_page.dart';
@@ -12,9 +13,10 @@ import 'pages/data_penghuni_page.dart';
 import 'pages/login_page.dart';
 import 'pages/pembayaran_qris_page.dart';
 import 'pages/pembayaran_transfer_page.dart';
+import 'pages/register_page.dart';
 import 'pages/rincian_tagihan_page.dart';
 import 'pages/riwayat_tiket_page.dart';
-import 'pages/register_page.dart';
+import 'pages/verifikasi_pembayaran_page.dart';
 
 void main() {
   runApp(const KosAsihApp());
@@ -40,6 +42,9 @@ class KosAsihApp extends StatelessWidget {
         RegisterKosAsihPage.routeName: (_) => const RegisterKosAsihPage(),
         BerandaKosAsihPage.routeName: (_) => const BerandaKosAsihPage(),
         DashboardPemilikPage.routeName: (_) => const DashboardPemilikPage(),
+        VerifikasiPembayaranPage.routeName: (_) =>
+            const VerifikasiPembayaranPage(),
+        KelolaKamarPage.routeName: (_) => const KelolaKamarPage(),
         DataPenghuniPage.routeName: (_) => const DataPenghuniPage(),
         AturanDendaPage.routeName: (_) => const AturanDendaPage(),
         MenuKelolaPage.routeName: (_) => const MenuKelolaPage(),

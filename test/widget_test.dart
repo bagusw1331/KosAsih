@@ -15,6 +15,8 @@ import 'package:kostasih_mobile/pages/laporan_aduan_page.dart';
 import 'package:kostasih_mobile/pages/login_page_v2.dart';
 import 'package:kostasih_mobile/pages/dashboard_pemilik_page.dart';
 import 'package:kostasih_mobile/pages/data_penghuni_page.dart';
+import 'package:kostasih_mobile/pages/kelola_kamar_page.dart';
+import 'package:kostasih_mobile/pages/verifikasi_pembayaran_page.dart';
 
 void main() {
   testWidgets('menampilkan halaman utama KosAsih', (WidgetTester tester) async {
@@ -139,5 +141,19 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: PembayaranQrisPage()));
     expect(find.text('PT KOSASIH SEJAHTERA UTAMA'), findsOneWidget);
     expect(find.text('Rp 1.290.000'), findsOneWidget);
+  });
+
+  testWidgets('verifikasi pembayaran dan kelola kamar bisa dirender', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const MaterialApp(home: VerifikasiPembayaranPage()));
+    expect(find.text('Verifikasi Bukti Pembayaran'), findsOneWidget);
+    expect(find.text('Bagus Wihandono'), findsOneWidget);
+    expect(find.text('Raka Pratama'), findsOneWidget);
+
+    await tester.pumpWidget(const MaterialApp(home: KelolaKamarPage()));
+    expect(find.text('Daftar & Kelola Kamar'), findsOneWidget);
+    expect(find.text('Kamar A-08'), findsOneWidget);
+    expect(find.text('Kamar B-09'), findsOneWidget);
   });
 }

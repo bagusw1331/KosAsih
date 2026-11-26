@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dashboard_pemilik_page.dart';
 import 'komplain_fasilitas_page.dart';
 import 'menu_kelola_page.dart';
+import 'verifikasi_pembayaran_page.dart';
 
 void main() => runApp(
   const MaterialApp(
@@ -24,9 +25,8 @@ class PapanPengumumanPage extends StatelessWidget {
         Navigator.of(context)
             .pushReplacementNamed(DashboardPemilikPage.routeName);
       case 1:
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Halaman Verifikasi belum tersedia.')),
-        );
+        Navigator.of(context)
+            .pushReplacementNamed(VerifikasiPembayaranPage.routeName);
       case 2:
         Navigator.of(context)
             .pushReplacementNamed(KomplainFasilitasPage.routeName);

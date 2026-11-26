@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'aturan_denda_page.dart';
 import 'komplain_fasilitas_page.dart';
 import 'menu_kelola_page.dart';
 import 'papan_pengumuman_page.dart';
+import 'verifikasi_pembayaran_page.dart';
 
 /// Dashboard utama (mode Pemilik Kos).
 class DashboardPemilikPage extends StatelessWidget {
@@ -13,12 +15,6 @@ class DashboardPemilikPage extends StatelessWidget {
 
   void _navTo(BuildContext context, String routeName) {
     Navigator.of(context).pushNamed(routeName);
-  }
-
-  void _belumTersedia(BuildContext context, String nama) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Halaman $nama belum tersedia.')),
-    );
   }
 
   @override
@@ -543,7 +539,10 @@ class DashboardPemilikPage extends StatelessWidget {
                           SizedBox(
                             height: 32,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () => _navTo(
+                                context,
+                                VerifikasiPembayaranPage.routeName,
+                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF1545C7),
                                 foregroundColor: Colors.white,
@@ -633,7 +632,10 @@ class DashboardPemilikPage extends StatelessWidget {
                           SizedBox(
                             height: 32,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () => _navTo(
+                                context,
+                                KomplainFasilitasPage.routeName,
+                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFFEEF4FF),
                                 foregroundColor: const Color(0xFF1545C7),
@@ -723,7 +725,8 @@ class DashboardPemilikPage extends StatelessWidget {
                           SizedBox(
                             height: 32,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () =>
+                                  _navTo(context, AturanDendaPage.routeName),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFFEEF4FF),
                                 foregroundColor: const Color(0xFF1545C7),
@@ -770,7 +773,10 @@ class DashboardPemilikPage extends StatelessWidget {
                           child: SizedBox(
                             height: 130,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () => _navTo(
+                                context,
+                                VerifikasiPembayaranPage.routeName,
+                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 foregroundColor: const Color(0xFF1545C7),
@@ -857,7 +863,8 @@ class DashboardPemilikPage extends StatelessWidget {
                           child: SizedBox(
                             height: 130,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () =>
+                                  _navTo(context, AturanDendaPage.routeName),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 foregroundColor: const Color(0xFF1545C7),
@@ -949,7 +956,10 @@ class DashboardPemilikPage extends StatelessWidget {
                           child: SizedBox(
                             height: 130,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () => _navTo(
+                                context,
+                                KomplainFasilitasPage.routeName,
+                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 foregroundColor: const Color(0xFF1545C7),
@@ -1036,7 +1046,10 @@ class DashboardPemilikPage extends StatelessWidget {
                           child: SizedBox(
                             height: 130,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () => _navTo(
+                                context,
+                                PapanPengumumanPage.routeName,
+                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 foregroundColor: const Color(0xFF1545C7),
@@ -1193,7 +1206,10 @@ class DashboardPemilikPage extends StatelessWidget {
                   // Verifikasi (badge 2)
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () => _belumTersedia(context, 'Verifikasi'),
+                      onPressed: () => _navTo(
+                        context,
+                        VerifikasiPembayaranPage.routeName,
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: const Color(0xFF9CA3AF),
