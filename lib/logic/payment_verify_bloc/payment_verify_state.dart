@@ -1,10 +1,29 @@
-/// State kerangka untuk PaymentVerifyBloc.
-sealed class PaymentVerifyState {}
+import '../../data/models/pembayaran_model.dart';
 
-class PaymentVerifyInitial extends PaymentVerifyState {}
+sealed class PaymentVerifyState {
+  const PaymentVerifyState();
+}
 
-class PaymentVerifyLoading extends PaymentVerifyState {}
+final class PaymentVerifyInitial extends PaymentVerifyState {
+  const PaymentVerifyInitial();
+}
 
-class PaymentVerifyLoaded extends PaymentVerifyState {}
+final class PaymentVerifyLoading extends PaymentVerifyState {
+  const PaymentVerifyLoading();
+}
 
-class PaymentVerifyFailure extends PaymentVerifyState {}
+final class PaymentVerifyLoaded extends PaymentVerifyState {
+  const PaymentVerifyLoaded({
+    required this.daftarPembayaran,
+    this.actionMessage,
+  });
+
+  final List<PembayaranModel> daftarPembayaran;
+  final String? actionMessage;
+}
+
+final class PaymentVerifyFailure extends PaymentVerifyState {
+  const PaymentVerifyFailure(this.message);
+
+  final String message;
+}
