@@ -1,5 +1,21 @@
 import 'package:flutter/material.dart';
 
+import 'pages/aturan_denda_page.dart';
+import 'pages/beranda_penghuni_page.dart';
+import 'pages/komplain_fasilitas_page.dart';
+import 'pages/menu_kelola_page.dart';
+import 'pages/papan_pengumuman_page.dart';
+import 'pages/laporan_aduan_page.dart';
+import 'pages/login_page_v2.dart';
+import 'pages/dashboard_pemilik_page.dart';
+import 'pages/data_penghuni_page.dart';
+import 'pages/login_page.dart';
+import 'pages/pembayaran_qris_page.dart';
+import 'pages/pembayaran_transfer_page.dart';
+import 'pages/rincian_tagihan_page.dart';
+import 'pages/riwayat_tiket_page.dart';
+import 'pages/register_page.dart';
+
 void main() {
   runApp(const KosAsihApp());
 }
@@ -18,7 +34,26 @@ class KosAsihApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const KosAsihHomePage(),
+      home: const LoginKosAsihPage(),
+      routes: <String, WidgetBuilder>{
+        LoginKosAsihPage.routeName: (_) => const LoginKosAsihPage(),
+        RegisterKosAsihPage.routeName: (_) => const RegisterKosAsihPage(),
+        BerandaKosAsihPage.routeName: (_) => const BerandaKosAsihPage(),
+        DashboardPemilikPage.routeName: (_) => const DashboardPemilikPage(),
+        DataPenghuniPage.routeName: (_) => const DataPenghuniPage(),
+        AturanDendaPage.routeName: (_) => const AturanDendaPage(),
+        MenuKelolaPage.routeName: (_) => const MenuKelolaPage(),
+        KomplainFasilitasPage.routeName: (_) => const KomplainFasilitasPage(),
+        PapanPengumumanPage.routeName: (_) => const PapanPengumumanPage(),
+        LaporanAduanPage.routeName: (_) => const LaporanAduanPage(),
+        RincianTagihanPage.routeName: (_) => const RincianTagihanPage(),
+        RiwayatTiketPage.routeName: (_) => const RiwayatTiketPage(),
+        PembayaranTransferPage.routeName: (_) =>
+            const PembayaranTransferPage(),
+        PembayaranQrisPage.routeName: (_) => const PembayaranQrisPage(),
+        LoginPage.routeName: (_) => const LoginPage(),
+        '/home': (_) => const KosAsihHomePage(),
+      },
     );
   }
 }
