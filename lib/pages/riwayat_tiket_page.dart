@@ -1,110 +1,249 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../data/models/komplain_model.dart';
+import '../logic/ticket_fcm_bloc/ticket_fcm_bloc.dart';
+import '../logic/ticket_fcm_bloc/ticket_fcm_event.dart';
+import '../logic/ticket_fcm_bloc/ticket_fcm_state.dart';
 
 /// Riwayat dan progres tiket aduan penghuni.
-class RiwayatTiketPage extends StatelessWidget {
+class RiwayatTiketPage extends StatefulWidget {
   const RiwayatTiketPage({super.key});
 
   static const String routeName = '/riwayat-tiket';
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text('Riwayat & Progres Tiket'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.tune),
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Filter tiket belum tersedia.')),
-            ),
-          ),
-        ],
+  State<RiwayatTiketPage> createState() => _RiwayatTiketPageState();
+}
+
+class _RiwayatTiketPageState extends State<RiwayatTiketPage> {
+  String _statusFilter = 'semua';
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<TicketFcmBloc>().add(const TicketRequested());
+  }
+
+  void _pilihFilter() {
+    showModalBottomSheet<void>(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+      builder: (ctx) => SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              children: const [
-                Icon(
-                  Icons.door_front_door_outlined,
-                  size: 14,
-                  color: Color(0xFF1D4ED8),
-                ),
-                SizedBox(width: 4),
-                Text(
-                  'Laporan / Aduan  •  Kamar A-04 • Bagus Wihandono',
-                  style: TextStyle(fontSize: 11, color: Color(0xFF475569)),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            _ticketCard(
-              nomor: '#TKT-014',
-              judul: 'AC kurang dingin & menetes',
-              status: 'SEDANG DIPERBAIKI',
-              statusColor: const Color(0xFF1D4ED8),
-              kategori: 'Pendingin Udara (AC)',
-              waktu: '14 Oktober 2026, 09.30 WIB',
-              catatan: 'Teknisi AC langganan dijadwalkan tiba hari ini pukul 14.00 WIB. Mohon kunci kamar disiapkan jika penghuni sedang keluar.',
-              aktif: true,
-            ),
             const SizedBox(height: 12),
-            _ticketCard(
-              nomor: '#TKT-009',
-              judul: 'Keran kamar mandi bocor',
-              status: 'SELESAI',
-              statusColor: const Color(0xFF15803D),
-              kategori: 'Air & Sanitasi',
-              waktu: 'Diselesaikan pada 03 Okt 2026, 11.20 WIB',
-              catatan: 'Solusi: Karet seal keran telah diganti baru oleh pengelola dan dites normal.',
-              aktif: false,
+            const Text(
+              'Filter Status Tiket',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
+            ListTile(
+              title: const Text('Semua Tiket'),
+              trailing: _statusFilter == 'semua'
+                  ? const Icon(Icons.check, color: Color(0xFF1D4ED8))
+                  : null,
+              onTap: () {
+                setState(() => _statusFilter = 'semua');
+                Navigator.of(ctx).pop();
+              },
+            ),
+            ListTile(
+              title: const Text('Menunggu Tinjauan'),
+              trailing: _statusFilter == 'menunggu'
+                  ? const Icon(Icons.check, color: Color(0xFF1D4ED8))
+                  : null,
+              onTap: () {
+                setState(() => _statusFilter = 'menunggu');
+                Navigator.of(ctx).pop();
+              },
+            ),
+            ListTile(
+              title: const Text('Sedang Diperbaiki'),
+              trailing: _statusFilter == 'sedang_diperbaiki'
+                  ? const Icon(Icons.check, color: Color(0xFF1D4ED8))
+                  : null,
+              onTap: () {
+                setState(() => _statusFilter = 'sedang_diperbaiki');
+                Navigator.of(ctx).pop();
+              },
+            ),
+            ListTile(
+              title: const Text('Selesai'),
+              trailing: _statusFilter == 'selesai'
+                  ? const Icon(Icons.check, color: Color(0xFF1D4ED8))
+                  : null,
+              onTap: () {
+                setState(() => _statusFilter = 'selesai');
+                Navigator.of(ctx).pop();
+              },
             ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 2,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF1D4ED8),
-        unselectedItemColor: const Color(0xFF64748B),
-        onTap: (index) {
-          if (index == 0) {
-            Navigator.of(context).pushReplacementNamed('/beranda-penghuni');
-          }
-          if (index == 1) {
-            Navigator.of(context).pushReplacementNamed('/rincian-tagihan');
-          }
-          if (index == 3) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Panduan belum tersedia.')),
-            );
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Beranda',
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<TicketFcmBloc, TicketFcmState>(
+      builder: (context, state) {
+        final isLoading =
+            state is TicketFcmInitial || state is TicketFcmLoading;
+        final semua = state is TicketFcmLoaded
+            ? state.daftarKomplain
+            : const <KomplainModel>[];
+        final daftarTiket = _statusFilter == 'semua'
+            ? semua
+            : semua.where((k) => k.statusKomplain == _statusFilter).toList();
+
+        return Scaffold(
+          backgroundColor: const Color(0xFFF8FAFC),
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: const Text('Riwayat & Progres Tiket'),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            actions: [
+              IconButton(icon: const Icon(Icons.tune), onPressed: _pilihFilter),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.receipt_outlined),
-            label: 'Tagihan',
+          body: isLoading && semua.isEmpty
+              ? const Center(child: CircularProgressIndicator())
+              : RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<TicketFcmBloc>().add(const TicketRequested());
+                  },
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Row(
+                          children: [
+                            Icon(
+                              Icons.door_front_door_outlined,
+                              size: 14,
+                              color: Color(0xFF1D4ED8),
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              'Laporan / Aduan  •  Kamar A-04 • Bagus Wihandono',
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: Color(0xFF475569),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        if (daftarTiket.isEmpty)
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(24),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(18),
+                              border: Border.all(
+                                color: const Color(0xFFF1F5F9),
+                              ),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'Belum ada tiket aduan pada filter ini.',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFF64748B),
+                                ),
+                              ),
+                            ),
+                          )
+                        else
+                          ...daftarTiket.map((tiket) {
+                            final isMenunggu =
+                                tiket.statusKomplain == 'menunggu';
+                            final isDikerjakan =
+                                tiket.statusKomplain == 'sedang_diperbaiki';
+                            final aktif = isMenunggu || isDikerjakan;
+                            final statusText = isMenunggu
+                                ? 'MENUNGGU TINJAUAN'
+                                : isDikerjakan
+                                ? 'SEDANG DIPERBAIKI'
+                                : 'SELESAI';
+                            final statusColor = isMenunggu
+                                ? const Color(0xFFEA580C)
+                                : isDikerjakan
+                                ? const Color(0xFF1D4ED8)
+                                : const Color(0xFF15803D);
+                            final catatanText =
+                                (tiket.catatanKomplain != null &&
+                                    tiket.catatanKomplain!.isNotEmpty)
+                                ? tiket.catatanKomplain!
+                                : aktif
+                                ? 'Laporan telah diterima dan sedang ditinjau oleh pengelola kos.'
+                                : 'Perbaikan telah diselesaikan oleh pengelola kos.';
+
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: _ticketCard(
+                                nomor: tiket.kodeTiket,
+                                judul: tiket.judulKomplain,
+                                status: statusText,
+                                statusColor: statusColor,
+                                kategori: tiket.kategoriFasilitas,
+                                waktu: tiket.tglKomplain,
+                                catatan: catatanText,
+                                aktif: aktif,
+                                sedangDikerjakan: isDikerjakan,
+                              ),
+                            );
+                          }),
+                      ],
+                    ),
+                  ),
+                ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: 2,
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: const Color(0xFF1D4ED8),
+            unselectedItemColor: const Color(0xFF64748B),
+            onTap: (index) {
+              if (index == 0) {
+                Navigator.of(context).pushReplacementNamed('/beranda-penghuni');
+              }
+              if (index == 1) {
+                Navigator.of(context).pushReplacementNamed('/rincian-tagihan');
+              }
+              if (index == 3) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Panduan belum tersedia.')),
+                );
+              }
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_outlined),
+                label: 'Beranda',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.receipt_outlined),
+                label: 'Tagihan',
+              ),
+              BottomNavigationBarItem(icon: Icon(Icons.build), label: 'Aduan'),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.menu_book_outlined),
+                label: 'Panduan',
+              ),
+            ],
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.build), label: 'Aduan'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_outlined),
-            label: 'Panduan',
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -117,6 +256,7 @@ class RiwayatTiketPage extends StatelessWidget {
     required String waktu,
     required String catatan,
     required bool aktif,
+    required bool sedangDikerjakan,
   }) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -184,9 +324,20 @@ class RiwayatTiketPage extends StatelessWidget {
               children: [
                 _step('Diterima', true, const Color(0xFF15803D)),
                 Expanded(
-                  child: Container(height: 2, color: const Color(0xFF1D4ED8)),
+                  child: Container(
+                    height: 2,
+                    color: sedangDikerjakan
+                        ? const Color(0xFF1D4ED8)
+                        : const Color(0xFFE2E8F0),
+                  ),
                 ),
-                _step('Pengerjaan', true, const Color(0xFF1D4ED8)),
+                _step(
+                  'Pengerjaan',
+                  sedangDikerjakan,
+                  sedangDikerjakan
+                      ? const Color(0xFF1D4ED8)
+                      : const Color(0xFF94A3B8),
+                ),
                 Expanded(
                   child: Container(height: 2, color: const Color(0xFFE2E8F0)),
                 ),
