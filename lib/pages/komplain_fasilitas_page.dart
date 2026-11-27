@@ -1,6 +1,5 @@
 import 'dart:io';
 
-<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,13 +9,11 @@ import '../logic/payment_verify_bloc/payment_verify_state.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_bloc.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_event.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_state.dart';
+import '../widgets/kosasih_bottom_nav.dart';
 import 'dashboard_pemilik_page.dart';
 import 'menu_kelola_page.dart';
 import 'papan_pengumuman_page.dart';
 import 'verifikasi_pembayaran_page.dart';
-=======
-import '../widgets/kosasih_bottom_nav.dart';
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
 
 class KomplainFasilitasPage extends StatefulWidget {
   const KomplainFasilitasPage({super.key});
@@ -25,7 +22,6 @@ class KomplainFasilitasPage extends StatefulWidget {
   static const String routeName = '/komplain-fasilitas';
 
   @override
-<<<<<<< HEAD
   State<KomplainFasilitasPage> createState() => _KomplainFasilitasPageState();
 }
 
@@ -63,11 +59,6 @@ class _KomplainFasilitasPageState extends State<KomplainFasilitasPage> {
       return k.statusKomplain == 'selesai';
     }).toList();
   }
-=======
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
 
   Future<void> _ubahStatusKomplain(
     KomplainModel item, {
@@ -136,6 +127,8 @@ class _KomplainFasilitasPageState extends State<KomplainFasilitasPage> {
       ),
     );
 
+    catatanController.dispose();
+
     if (catatan != null && mounted) {
       context.read<TicketFcmBloc>().add(
         TicketUpdated(
@@ -147,7 +140,6 @@ class _KomplainFasilitasPageState extends State<KomplainFasilitasPage> {
     }
   }
 
-<<<<<<< HEAD
   void _perbesarFoto(KomplainModel item) {
     final foto = item.fotoKomplain;
     showDialog<void>(
@@ -179,10 +171,6 @@ class _KomplainFasilitasPageState extends State<KomplainFasilitasPage> {
           ),
         ],
       ),
-=======
-      // Bottom Navigation Bar
-      bottomNavigationBar: const PemilikBottomNav(currentIndex: 2),
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
     );
   }
 
@@ -193,7 +181,7 @@ class _KomplainFasilitasPageState extends State<KomplainFasilitasPage> {
         height: height,
         width: double.infinity,
         fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => _fotoFallback(height),
+        errorBuilder: (_, _, _) => _fotoFallback(height),
       );
     }
     if (path != null && path.isNotEmpty && File(path).existsSync()) {

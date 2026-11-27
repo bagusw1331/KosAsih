@@ -1,6 +1,5 @@
 import 'dart:io';
 
-<<<<<<< HEAD
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,9 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_bloc.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_event.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_state.dart';
-=======
 import '../widgets/kosasih_bottom_nav.dart';
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
 import 'riwayat_tiket_page.dart';
 
 class LaporanAduanPage extends StatefulWidget {
@@ -690,50 +687,9 @@ class _LaporanAduanPageState extends State<LaporanAduanPage> {
               ),
             ),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: 2,
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: const Color(0xFF1D4ED8),
-            unselectedItemColor: const Color(0xFF64748B),
-            selectedFontSize: 11,
-            unselectedFontSize: 11,
-            onTap: (index) {
-              if (index == 0) {
-                Navigator.of(context).pushReplacementNamed('/beranda-penghuni');
-              } else if (index == 1) {
-                Navigator.of(context).pushReplacementNamed('/rincian-tagihan');
-              } else if (index == 3) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Panduan belum tersedia.')),
-                );
-              }
-            },
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                label: 'Beranda',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.receipt_outlined),
-                label: 'Tagihan',
-              ),
-              BottomNavigationBarItem(icon: Icon(Icons.build), label: 'Aduan'),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.menu_book_outlined),
-                label: 'Panduan',
-              ),
-            ],
-          ),
-<<<<<<< HEAD
+          bottomNavigationBar: const PenghuniBottomNav(currentIndex: 2),
         );
       },
-=======
-        ),
-      ),
-
-      // Bottom Navigation Bar Mode Penghuni (4 Tab - Selected Aduan)
-      bottomNavigationBar: const PenghuniBottomNav(currentIndex: 2),
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
     );
   }
 

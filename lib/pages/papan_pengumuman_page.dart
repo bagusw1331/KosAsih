@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-<<<<<<< HEAD
 import '../data/models/pengumuman_model.dart';
 import '../logic/payment_verify_bloc/payment_verify_bloc.dart';
 import '../logic/payment_verify_bloc/payment_verify_state.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_bloc.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_event.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_state.dart';
+import '../widgets/kosasih_bottom_nav.dart';
 import 'dashboard_pemilik_page.dart';
 import 'komplain_fasilitas_page.dart';
 import 'menu_kelola_page.dart';
 import 'verifikasi_pembayaran_page.dart';
-=======
-import '../widgets/kosasih_bottom_nav.dart';
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
 
 class PapanPengumumanPage extends StatefulWidget {
   const PapanPengumumanPage({super.key});
@@ -23,7 +20,6 @@ class PapanPengumumanPage extends StatefulWidget {
   static const String routeName = '/papan-pengumuman';
 
   @override
-<<<<<<< HEAD
   State<PapanPengumumanPage> createState() => _PapanPengumumanPageState();
 }
 
@@ -69,11 +65,6 @@ class _PapanPengumumanPageState extends State<PapanPengumumanPage> {
     }
     return sorted;
   }
-=======
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
 
   Future<void> _bukaFormPengumuman({PengumumanModel? existing}) async {
     final judulController = TextEditingController(
@@ -858,7 +849,6 @@ class _PapanPengumumanPageState extends State<PapanPengumumanPage> {
               ),
             ],
           ),
-<<<<<<< HEAD
           const SizedBox(height: 12),
           Container(
             width: double.infinity,
@@ -899,13 +889,6 @@ class _PapanPengumumanPageState extends State<PapanPengumumanPage> {
           ),
         ],
       ),
-=======
-        ),
-      ),
-
-      // Bottom Navigation Bar
-      bottomNavigationBar: const PemilikBottomNav(currentIndex: 3),
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
     );
   }
 

@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-<<<<<<< HEAD
 import '../data/models/pembayaran_model.dart';
 import '../logic/payment_verify_bloc/payment_verify_bloc.dart';
 import '../logic/payment_verify_bloc/payment_verify_event.dart';
 import '../logic/payment_verify_bloc/payment_verify_state.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_bloc.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_state.dart';
+import '../widgets/kosasih_bottom_nav.dart';
 import 'dashboard_pemilik_page.dart';
 import 'komplain_fasilitas_page.dart';
 import 'menu_kelola_page.dart';
 import 'papan_pengumuman_page.dart';
-=======
-import '../widgets/kosasih_bottom_nav.dart';
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
 
 /// Halaman Verifikasi Bukti Pembayaran (mode Pemilik).
 class VerifikasiPembayaranPage extends StatefulWidget {
@@ -37,7 +34,6 @@ class _VerifikasiPembayaranPageState extends State<VerifikasiPembayaranPage> {
     context.read<PaymentVerifyBloc>().add(const PaymentVerificationRequested());
   }
 
-<<<<<<< HEAD
   void _onNavTap(BuildContext context, int index) {
     if (index == 1) return;
     switch (index) {
@@ -66,26 +62,6 @@ class _VerifikasiPembayaranPageState extends State<VerifikasiPembayaranPage> {
       }
     }
     return '${nominal < 0 ? '-' : ''}Rp $buffer';
-=======
-  int get _jumlahMenunggu => _daftarBukti
-      .where((e) => e.status == _StatusVerifikasi.menunggu)
-      .length;
-
-  int get _jumlahLunas =>
-      13 +
-      _daftarBukti.where((e) => e.status == _StatusVerifikasi.lunas).length;
-
-  int get _jumlahDitolak =>
-      _daftarBukti.where((e) => e.status == _StatusVerifikasi.ditolak).length;
-
-  List<_ItemPembayaran> get _filteredItems {
-    final target = switch (_filterIndex) {
-      0 => _StatusVerifikasi.menunggu,
-      1 => _StatusVerifikasi.lunas,
-      _ => _StatusVerifikasi.ditolak,
-    };
-    return _daftarBukti.where((e) => e.status == target).toList();
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
   }
 
   String _namaFileDariPath(String? path) {
@@ -275,7 +251,6 @@ class _VerifikasiPembayaranPageState extends State<VerifikasiPembayaranPage> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     final komplainAktif = context.select<TicketFcmBloc, int>((bloc) {
       final ticketState = bloc.state;
       if (ticketState is TicketFcmLoaded) {
@@ -285,9 +260,6 @@ class _VerifikasiPembayaranPageState extends State<VerifikasiPembayaranPage> {
       }
       return 0;
     });
-=======
-    final items = _filteredItems;
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
 
     return BlocConsumer<PaymentVerifyBloc, PaymentVerifyState>(
       listener: (context, state) {
@@ -851,7 +823,6 @@ class _VerifikasiPembayaranPageState extends State<VerifikasiPembayaranPage> {
                 ),
                 label: 'Komplain',
               ),
-<<<<<<< HEAD
               const BottomNavigationBarItem(
                 icon: Icon(Icons.campaign_outlined),
                 label: 'Pengumuman',
@@ -864,15 +835,6 @@ class _VerifikasiPembayaranPageState extends State<VerifikasiPembayaranPage> {
           ),
         );
       },
-=======
-          ],
-        ),
-      ),
-      bottomNavigationBar: PemilikBottomNav(
-        currentIndex: 1,
-        verifikasiBadge: _jumlahMenunggu,
-      ),
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
     );
   }
 

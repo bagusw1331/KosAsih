@@ -9,7 +9,6 @@ import '../data/models/pembayaran_model.dart';
 import '../logic/payment_verify_bloc/payment_verify_bloc.dart';
 import '../logic/payment_verify_bloc/payment_verify_event.dart';
 import '../logic/payment_verify_bloc/payment_verify_state.dart';
-
 import '../widgets/kosasih_bottom_nav.dart';
 
 /// Halaman pembayaran via transfer bank (BCA).
@@ -126,12 +125,12 @@ class _PembayaranTransferPageState extends State<PembayaranTransferPage> {
 
     final idTagihan = targetTagihan?.idPembayaran ?? 1;
     context.read<PaymentVerifyBloc>().add(
-          PaymentProofSubmitted(
-            idPembayaran: idTagihan,
-            fileBukti: _selectedFile!,
-            metodePembayaran: 'Transfer Bank BCA',
-          ),
-        );
+      PaymentProofSubmitted(
+        idPembayaran: idTagihan,
+        fileBukti: _selectedFile!,
+        metodePembayaran: 'Transfer Bank BCA',
+      ),
+    );
   }
 
   void _lihatKwitansi(BuildContext context, PembayaranModel tagihan) {
@@ -303,8 +302,10 @@ class _PembayaranTransferPageState extends State<PembayaranTransferPage> {
                         children: [
                           const Text(
                             'BATAS WAKTU',
-                            style:
-                                TextStyle(fontSize: 9, color: Colors.white70),
+                            style: TextStyle(
+                              fontSize: 9,
+                              color: Colors.white70,
+                            ),
                           ),
                           const SizedBox(width: 6),
                           Container(
@@ -394,8 +395,10 @@ class _PembayaranTransferPageState extends State<PembayaranTransferPage> {
                       const SizedBox(height: 10),
                       const Text(
                         'a.n. PT KosAsih Sejahtera Utama',
-                        style:
-                            TextStyle(fontSize: 11, color: Color(0xFF475569)),
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFF475569),
+                        ),
                       ),
                       const SizedBox(height: 12),
                       const Text(
@@ -498,8 +501,10 @@ class _PembayaranTransferPageState extends State<PembayaranTransferPage> {
                         SizedBox(height: 2),
                         Text(
                           'Format file JPG, PNG, atau PDF (Maks. 5MB)',
-                          style:
-                              TextStyle(fontSize: 10, color: Color(0xFF64748B)),
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Color(0xFF64748B),
+                          ),
                         ),
                       ],
                     ),
@@ -630,8 +635,10 @@ class _PembayaranTransferPageState extends State<PembayaranTransferPage> {
                     icon: const Icon(Icons.picture_as_pdf_outlined, size: 16),
                     label: const Text(
                       'UNDUH E-KWITANSI PDF (LUNAS)',
-                      style:
-                          TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -646,46 +653,13 @@ class _PembayaranTransferPageState extends State<PembayaranTransferPage> {
                 ),
               ],
             ),
-<<<<<<< HEAD
+          ),
+          bottomNavigationBar: const PenghuniBottomNav(
+            currentIndex: 1,
+            allowReselectCurrent: true,
           ),
         );
       },
-=======
-            const SizedBox(height: 10),
-            SizedBox(
-              width: double.infinity,
-              height: 44,
-              child: OutlinedButton.icon(
-                onPressed: null,
-                style: OutlinedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                ),
-                icon: const Icon(Icons.picture_as_pdf_outlined, size: 16),
-                label: const Text(
-                  'UNDUH E-KWITANSI PDF (LUNAS)',
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              '* E-Kwitansi resmi baru tersedia sesaat setelah pembayaran terverifikasi bendahara.',
-              style: TextStyle(
-                fontSize: 10,
-                color: Color(0xFF94A3B8),
-                height: 1.4,
-              ),
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: const PenghuniBottomNav(
-        currentIndex: 1,
-        allowReselectCurrent: true,
-      ),
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
     );
   }
 }

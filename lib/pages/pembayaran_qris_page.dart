@@ -8,7 +8,6 @@ import '../data/models/pembayaran_model.dart';
 import '../logic/payment_verify_bloc/payment_verify_bloc.dart';
 import '../logic/payment_verify_bloc/payment_verify_event.dart';
 import '../logic/payment_verify_bloc/payment_verify_state.dart';
-
 import '../widgets/kosasih_bottom_nav.dart';
 
 /// Halaman pembayaran QRIS.
@@ -54,7 +53,9 @@ class _PembayaranQrisPageState extends State<PembayaranQrisPage> {
       final file = File(picked.path!);
       final size = await file.length();
       if (size > _maxFileBytes) {
-        setState(() => _fileError = 'Ukuran file melebihi batas maksimal 5 MB.');
+        setState(
+          () => _fileError = 'Ukuran file melebihi batas maksimal 5 MB.',
+        );
         return;
       }
 
@@ -110,12 +111,12 @@ class _PembayaranQrisPageState extends State<PembayaranQrisPage> {
 
     final idTagihan = targetTagihan?.idPembayaran ?? 1;
     context.read<PaymentVerifyBloc>().add(
-          PaymentProofSubmitted(
-            idPembayaran: idTagihan,
-            fileBukti: _selectedFile!,
-            metodePembayaran: 'QRIS',
-          ),
-        );
+      PaymentProofSubmitted(
+        idPembayaran: idTagihan,
+        fileBukti: _selectedFile!,
+        metodePembayaran: 'QRIS',
+      ),
+    );
   }
 
   void _lihatKwitansi(BuildContext context, PembayaranModel tagihan) {
@@ -288,8 +289,10 @@ class _PembayaranQrisPageState extends State<PembayaranQrisPage> {
                       const SizedBox(height: 3),
                       const Text(
                         'NMID : ID10260639281928',
-                        style:
-                            TextStyle(fontSize: 10, color: Color(0xFF64748B)),
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFF64748B),
+                        ),
                       ),
                       const SizedBox(height: 10),
                       Container(
@@ -330,24 +333,25 @@ class _PembayaranQrisPageState extends State<PembayaranQrisPage> {
                               physics: const NeverScrollableScrollPhysics(),
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 13,
-                              ),
+                                    crossAxisCount: 13,
+                                  ),
                               itemCount: 169,
                               itemBuilder: (_, index) {
                                 final int row = index ~/ 13;
                                 final int col = index % 13;
-                                final bool finder = (row < 5 && col < 5) ||
+                                final bool finder =
+                                    (row < 5 && col < 5) ||
                                     (row < 5 && col > 7) ||
                                     (row > 7 && col < 5);
                                 final bool dark = finder
                                     ? ((row == 0 ||
-                                            row == 4 ||
-                                            col == 0 ||
-                                            col == 4) ||
-                                        (row >= 1 &&
-                                            row <= 3 &&
-                                            col >= 1 &&
-                                            col <= 3))
+                                              row == 4 ||
+                                              col == 0 ||
+                                              col == 4) ||
+                                          (row >= 1 &&
+                                              row <= 3 &&
+                                              col >= 1 &&
+                                              col <= 3))
                                     : (index * 17 + row * 3 + col) % 5 < 2;
                                 return Container(
                                   margin: const EdgeInsets.all(1),
@@ -500,8 +504,10 @@ class _PembayaranQrisPageState extends State<PembayaranQrisPage> {
                         SizedBox(height: 2),
                         Text(
                           'Format file JPG, PNG, atau PDF (Maks. 5MB)',
-                          style:
-                              TextStyle(fontSize: 10, color: Color(0xFF64748B)),
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Color(0xFF64748B),
+                          ),
                         ),
                       ],
                     ),
@@ -615,8 +621,10 @@ class _PembayaranQrisPageState extends State<PembayaranQrisPage> {
                     icon: const Icon(Icons.picture_as_pdf_outlined, size: 16),
                     label: const Text(
                       'UNDUH E-KWITANSI PDF (LUNAS)',
-                      style:
-                          TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -631,28 +639,13 @@ class _PembayaranQrisPageState extends State<PembayaranQrisPage> {
                 ),
               ],
             ),
-<<<<<<< HEAD
+          ),
+          bottomNavigationBar: const PenghuniBottomNav(
+            currentIndex: 1,
+            allowReselectCurrent: true,
           ),
         );
       },
-=======
-            const SizedBox(height: 8),
-            const Text(
-              '* E-Kwitansi resmi baru tersedia sesaat setelah pembayaran terverifikasi bendahara.',
-              style: TextStyle(
-                fontSize: 10,
-                color: Color(0xFF94A3B8),
-                height: 1.4,
-              ),
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: const PenghuniBottomNav(
-        currentIndex: 1,
-        allowReselectCurrent: true,
-      ),
->>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
     );
   }
 }
