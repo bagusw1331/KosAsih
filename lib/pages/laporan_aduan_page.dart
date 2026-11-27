@@ -1,5 +1,6 @@
 import 'dart:io';
 
+<<<<<<< HEAD
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_bloc.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_event.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_state.dart';
+=======
+import '../widgets/kosasih_bottom_nav.dart';
+>>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
 import 'riwayat_tiket_page.dart';
 
 class LaporanAduanPage extends StatefulWidget {
@@ -720,8 +724,16 @@ class _LaporanAduanPageState extends State<LaporanAduanPage> {
               ),
             ],
           ),
+<<<<<<< HEAD
         );
       },
+=======
+        ),
+      ),
+
+      // Bottom Navigation Bar Mode Penghuni (4 Tab - Selected Aduan)
+      bottomNavigationBar: const PenghuniBottomNav(currentIndex: 2),
+>>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
     );
   }
 

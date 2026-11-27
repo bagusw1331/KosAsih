@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/kosasih_bottom_nav.dart';
 import 'laporan_aduan_page.dart';
 import 'rincian_tagihan_page.dart';
 
@@ -934,108 +935,10 @@ class BerandaKosAsihPage extends StatelessWidget {
                 ),
               ),
             ),
-
-            // Navigasi bawah
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0x14000000),
-                    blurRadius: 12,
-                    offset: Offset(0, -2),
-                  ),
-                ],
-              ),
-              child: Row(
-                children: const [
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.home, size: 24, color: Color(0xFF1545C7)),
-                        SizedBox(height: 2),
-                        Text(
-                          'Beranda',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF1545C7),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.receipt_long,
-                          size: 24,
-                          color: Color(0xFF9CA3AF),
-                        ),
-                        SizedBox(height: 2),
-                        Text(
-                          'Tagihan',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF9CA3AF),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.handyman,
-                          size: 24,
-                          color: Color(0xFF9CA3AF),
-                        ),
-                        SizedBox(height: 2),
-                        Text(
-                          'Aduan',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF9CA3AF),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.menu_book,
-                          size: 24,
-                          color: Color(0xFF9CA3AF),
-                        ),
-                        SizedBox(height: 2),
-                        Text(
-                          'Panduan',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF9CA3AF),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
+      bottomNavigationBar: const PenghuniBottomNav(currentIndex: 0),
     );
   }
 }

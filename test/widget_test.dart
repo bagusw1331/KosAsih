@@ -156,4 +156,37 @@ void main() {
     expect(find.text('Kamar A-08'), findsOneWidget);
     expect(find.text('Kamar B-09'), findsOneWidget);
   });
+
+  testWidgets('navbar bawah pemilik dan penghuni berpindah halaman', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const KosAsihApp());
+    final NavigatorState navigator = tester.state<NavigatorState>(
+      find.byType(Navigator),
+    );
+
+    navigator.pushReplacementNamed(DashboardPemilikPage.routeName);
+    await tester.pumpAndSettle();
+    expect(find.text('Selamat Datang, Bu Asih 👋'), findsOneWidget);
+
+    await tester.tap(find.text('Verifikasi'));
+    await tester.pumpAndSettle();
+    expect(find.text('Verifikasi Bukti Pembayaran'), findsOneWidget);
+
+    await tester.tap(find.text('Kelola'));
+    await tester.pumpAndSettle();
+    expect(find.text('Menu Kelola & Pengaturan Kos'), findsOneWidget);
+
+    navigator.pushReplacementNamed(BerandaKosAsihPage.routeName);
+    await tester.pumpAndSettle();
+    expect(find.text('Halo, Bagus Wihandono 👋'), findsOneWidget);
+
+    await tester.tap(find.text('Tagihan'));
+    await tester.pumpAndSettle();
+    expect(find.text('Rincian Tagihan'), findsOneWidget);
+
+    await tester.tap(find.text('Aduan'));
+    await tester.pumpAndSettle();
+    expect(find.text('Laporan / Aduan'), findsOneWidget);
+  });
 }

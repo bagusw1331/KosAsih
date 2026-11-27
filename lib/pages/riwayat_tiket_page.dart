@@ -6,6 +6,8 @@ import '../logic/ticket_fcm_bloc/ticket_fcm_bloc.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_event.dart';
 import '../logic/ticket_fcm_bloc/ticket_fcm_state.dart';
 
+import '../widgets/kosasih_bottom_nav.dart';
+
 /// Riwayat dan progres tiket aduan penghuni.
 class RiwayatTiketPage extends StatefulWidget {
   const RiwayatTiketPage({super.key});
@@ -83,6 +85,7 @@ class _RiwayatTiketPageState extends State<RiwayatTiketPage> {
           ],
         ),
       ),
+<<<<<<< HEAD
     );
   }
 
@@ -244,6 +247,12 @@ class _RiwayatTiketPageState extends State<RiwayatTiketPage> {
           ),
         );
       },
+=======
+      bottomNavigationBar: const PenghuniBottomNav(
+        currentIndex: 2,
+        allowReselectCurrent: true,
+      ),
+>>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
     );
   }
 

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +14,9 @@ import 'dashboard_pemilik_page.dart';
 import 'menu_kelola_page.dart';
 import 'papan_pengumuman_page.dart';
 import 'verifikasi_pembayaran_page.dart';
+=======
+import '../widgets/kosasih_bottom_nav.dart';
+>>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
 
 class KomplainFasilitasPage extends StatefulWidget {
   const KomplainFasilitasPage({super.key});
@@ -21,6 +25,7 @@ class KomplainFasilitasPage extends StatefulWidget {
   static const String routeName = '/komplain-fasilitas';
 
   @override
+<<<<<<< HEAD
   State<KomplainFasilitasPage> createState() => _KomplainFasilitasPageState();
 }
 
@@ -58,6 +63,11 @@ class _KomplainFasilitasPageState extends State<KomplainFasilitasPage> {
       return k.statusKomplain == 'selesai';
     }).toList();
   }
+=======
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF8FAFC),
+>>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
 
   Future<void> _ubahStatusKomplain(
     KomplainModel item, {
@@ -137,6 +147,7 @@ class _KomplainFasilitasPageState extends State<KomplainFasilitasPage> {
     }
   }
 
+<<<<<<< HEAD
   void _perbesarFoto(KomplainModel item) {
     final foto = item.fotoKomplain;
     showDialog<void>(
@@ -168,6 +179,10 @@ class _KomplainFasilitasPageState extends State<KomplainFasilitasPage> {
           ),
         ],
       ),
+=======
+      // Bottom Navigation Bar
+      bottomNavigationBar: const PemilikBottomNav(currentIndex: 2),
+>>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
     );
   }
 

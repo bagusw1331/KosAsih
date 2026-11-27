@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/kosasih_bottom_nav.dart';
 import 'pembayaran_qris_page.dart';
 import 'pembayaran_transfer_page.dart';
 
@@ -350,39 +351,7 @@ class _RincianTagihanPageState extends State<RincianTagihanPage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 1,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF1D4ED8),
-        unselectedItemColor: const Color(0xFF64748B),
-        selectedFontSize: 11,
-        unselectedFontSize: 11,
-        onTap: (index) {
-          if (index == 0) {
-            Navigator.of(context).pushReplacementNamed('/beranda-penghuni');
-          } else if (index == 2) {
-            Navigator.of(context).pushReplacementNamed('/laporan-aduan');
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Beranda',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.receipt_long),
-            label: 'Tagihan',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.build_circle_outlined),
-            label: 'Aduan',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_outlined),
-            label: 'Panduan',
-          ),
-        ],
-      ),
+      bottomNavigationBar: const PenghuniBottomNav(currentIndex: 1),
     );
   }
 

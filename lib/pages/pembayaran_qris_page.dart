@@ -9,6 +9,8 @@ import '../logic/payment_verify_bloc/payment_verify_bloc.dart';
 import '../logic/payment_verify_bloc/payment_verify_event.dart';
 import '../logic/payment_verify_bloc/payment_verify_state.dart';
 
+import '../widgets/kosasih_bottom_nav.dart';
+
 /// Halaman pembayaran QRIS.
 class PembayaranQrisPage extends StatefulWidget {
   const PembayaranQrisPage({super.key});
@@ -629,9 +631,28 @@ class _PembayaranQrisPageState extends State<PembayaranQrisPage> {
                 ),
               ],
             ),
+<<<<<<< HEAD
           ),
         );
       },
+=======
+            const SizedBox(height: 8),
+            const Text(
+              '* E-Kwitansi resmi baru tersedia sesaat setelah pembayaran terverifikasi bendahara.',
+              style: TextStyle(
+                fontSize: 10,
+                color: Color(0xFF94A3B8),
+                height: 1.4,
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: const PenghuniBottomNav(
+        currentIndex: 1,
+        allowReselectCurrent: true,
+      ),
+>>>>>>> 3794f9c95113a0379f74cdcbede3f9935190c627
     );
   }
 }
